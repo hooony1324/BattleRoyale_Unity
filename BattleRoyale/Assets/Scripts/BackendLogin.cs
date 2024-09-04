@@ -21,49 +21,49 @@ public class BackendLogin
 
     public void CustomSignUp(string id, string pw)
     {
-        Debug.Log("È¸¿ø°¡ÀÔÀ» ¿äÃ»ÇÕ´Ï´Ù.");
+        Debug.Log("íšŒì›ê°€ì…ì„ ìš”ì²­í•©ë‹ˆë‹¤.");
 
         var bro = Backend.BMember.CustomSignUp(id, pw);
 
         if (bro.IsSuccess())
         {
-            Debug.Log("È¸¿ø°¡ÀÔ¿¡ ¼º°øÇß½À´Ï´Ù. : " + bro);
+            Debug.Log("íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤. : " + bro);
         }
         else
         {
-            Debug.LogError("È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇß½À´Ï´Ù. : " + bro);
+            Debug.LogError("íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + bro);
         }
     }
 
     public void CustomLogin(string id, string pw)
     {
-        Debug.Log("·Î±×ÀÎÀ» ¿äÃ»ÇÕ´Ï´Ù.");
+        Debug.Log("ë¡œê·¸ì¸ì„ ìš”ì²­í•©ë‹ˆë‹¤.");
 
         var bro = Backend.BMember.CustomLogin(id, pw);
 
         if (bro.IsSuccess())
         {
-            Debug.Log("·Î±×ÀÎÀÌ ¼º°øÇß½À´Ï´Ù. : " + bro);
+            Debug.Log("ë¡œê·¸ì¸ì´ ì„±ê³µí–ˆìŠµë‹ˆë‹¤. : " + bro);
         }
         else
         {
-            Debug.LogError("·Î±×ÀÎÀÌ ½ÇÆĞÇß½À´Ï´Ù. : " + bro);
+            Debug.LogError("ë¡œê·¸ì¸ì´ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + bro);
         }
     }
 
     public void UpdateNickname(string nickname)
     {
-        Debug.Log("´Ğ³×ÀÓ º¯°æÀ» ¿äÃ»ÇÕ´Ï´Ù.");
+        Debug.Log("ë‹‰ë„¤ì„ ë³€ê²½ì„ ìš”ì²­í•©ë‹ˆë‹¤.");
 
         var bro = Backend.BMember.UpdateNickname(nickname);
 
         if (bro.IsSuccess())
         {
-            Debug.Log("´Ğ³×ÀÓ º¯°æ¿¡ ¼º°øÇß½À´Ï´Ù : " + bro);
+            Debug.Log("ë‹‰ë„¤ì„ ë³€ê²½ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤ : " + bro);
         }
         else
         {
-            Debug.LogError("´Ğ³×ÀÓ º¯°æ¿¡ ½ÇÆĞÇß½À´Ï´Ù : " + bro);
+            Debug.LogError("ë‹‰ë„¤ì„ ë³€ê²½ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤ : " + bro);
         }
 
         

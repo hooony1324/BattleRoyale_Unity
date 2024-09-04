@@ -14,11 +14,11 @@ public class BackendManager : MonoBehaviour
 
         if (bro.IsSuccess())
         {
-            Debug.Log("ÃÊ±âÈ­ ¼º°ø: " + bro);
+            Debug.Log("ì´ˆê¸°í™” ì„±ê³µ: " + bro);
         }
         else
         {
-            Debug.LogError("ÃÊ±âÈ­ ½ÇÆĞ: " + bro);
+            Debug.LogError("ì´ˆê¸°í™” ì‹¤íŒ¨: " + bro);
         }
 
         Test();
@@ -26,20 +26,20 @@ public class BackendManager : MonoBehaviour
 
     void Test()
     {
-        BackendLogin.Instance.CustomLogin("user1", "1234"); // µÚ³¡ ·Î±×ÀÎ
+        BackendLogin.Instance.CustomLogin("user1", "1234"); // ë’¤ë ë¡œê·¸ì¸
 
-        BackendGameData.Instance.GetGameData(); // µ¥ÀÌÅÍ »ğÀÔ ÇÔ¼ö
+        BackendGameData.Instance.GetGameData(); // ë°ì´í„° ì‚½ì… í•¨ìˆ˜
 
-        // [Ãß°¡] ¼­¹ö¿¡ ºÒ·¯¿Â µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì, µ¥ÀÌÅÍ¸¦ »õ·Î »ı¼ºÇÏ¿© »ğÀÔ
+        // [ì¶”ê°€] ì„œë²„ì— ë¶ˆëŸ¬ì˜¨ ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•Šì„ ê²½ìš°, ë°ì´í„°ë¥¼ ìƒˆë¡œ ìƒì„±í•˜ì—¬ ì‚½ì…
         if (BackendGameData.userData == null)
         {
             BackendGameData.Instance.InsertGameData();
         }
 
-        BackendGameData.Instance.LevelUp(); // [Ãß°¡] ·ÎÄÃ¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ º¯°æ
+        BackendGameData.Instance.LevelUp(); // [ì¶”ê°€] ë¡œì»¬ì— ì €ì¥ëœ ë°ì´í„°ë¥¼ ë³€ê²½
 
-        BackendGameData.Instance.GameDataUpdate(); //[Ãß°¡] ¼­¹ö¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ µ¤¾î¾²±â(º¯°æµÈ ºÎºĞ¸¸)
+        BackendGameData.Instance.GameDataUpdate(); //[ì¶”ê°€] ì„œë²„ì— ì €ì¥ëœ ë°ì´í„°ë¥¼ ë®ì–´ì“°ê¸°(ë³€ê²½ëœ ë¶€ë¶„ë§Œ)
 
-        Debug.Log("Å×½ºÆ®¸¦ Á¾·áÇÕ´Ï´Ù.");
+        Debug.Log("í…ŒìŠ¤íŠ¸ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");
     }
 }
