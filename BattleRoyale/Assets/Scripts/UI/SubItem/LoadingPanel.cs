@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,8 +8,7 @@ public class LoadingPanel : UI_Base
 {
     enum Texts
     {
-        ResourceNameText,
-        PercentageText,
+        LoadingInfoText,
     }
 
     public override bool Init()
@@ -21,10 +21,10 @@ public class LoadingPanel : UI_Base
         return true;
     }
 
-
-    public void OnLoadingResourceChanged(string name, int current, int total)
+    public void SetLoadingInfoText(string text)
     {
-        GetTMPText((int)Texts.ResourceNameText).text = name;
-        GetTMPText((int)Texts.PercentageText).text = $"{current / total}";
+        GetTMPText((int)Texts.LoadingInfoText).text = text;
     }
+
+    
 }

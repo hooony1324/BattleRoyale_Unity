@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using static LoginScene;
 
 
 
@@ -16,23 +17,30 @@ public class UI_LoginScene : UI_Scene
         LoadingPanel,
     }
 
-    public override bool Init()
+    public void Init()
     {
-        if (base.Init() == false)
-            return false;
-
         BindGameObjects(typeof(Panels));
 
         GetGameObject((int)Panels.LoginPanel).SetActive(false);
-        GetGameObject((int)Panels.LoadingPanel).SetActive(true);
+        GetGameObject((int)Panels.LoadingPanel).gameObject.SetActive(true);
 
-        return true;
+        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged += HandleSceneUI;
     }
 
-    public void ShowLoginPanel()
+    private void OnDestroy()
     {
-        GetGameObject((int)Panels.LoginPanel).SetActive(true);
-        GetGameObject((int)Panels.LoadingPanel).SetActive(false);
+        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged -= HandleSceneUI;
+    }
+
+    void HandleSceneUI(ELoginSceneState state)
+    {
+        switch (state)
+        {
+            case ELoginSceneState.ResourceLoadFinished:
+                GetGameObject((int)Panels.LoginPanel).SetActive(true);
+                GetGameObject((int)Panels.LoadingPanel).SetActive(false);
+                break;
+        }
     }
 
 }

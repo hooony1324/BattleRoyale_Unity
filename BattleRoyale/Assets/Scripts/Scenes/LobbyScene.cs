@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class UI_Popup : UI_Base
+public class LobbyScene : BaseScene
 {
-    public Canvas UICanvas;
-
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
-        Managers.UI.SetCanvas(gameObject, true);
+        Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo("테스트입니당");
+
         return true;
     }
 
-    public virtual void ClosePopupUI()
+
+    public override void Clear()
     {
-        Managers.UI.ClosePopupUI(this);
+        
     }
 }

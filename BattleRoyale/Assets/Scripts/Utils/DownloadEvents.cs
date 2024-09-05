@@ -5,17 +5,17 @@ using UnityEngine;
 
 public struct DownloadProgressStatus
 {
-    public long _downloadedBytes;// 다운로드된 바이트 사이즈 
-    public long _totalBytes;     // 다운로드 받을 전체 사이즈 
-    public long _remainedBytes;  // 남은 바이트 사이즈 
-    public float _totalProgress; // 전체 진행률 0 ~ 1 
+    public long DownloadedBytes;// 다운로드된 바이트 사이즈 
+    public long TotalBytes;     // 다운로드 받을 전체 사이즈 
+    public long RemainingBytes;  // 남은 바이트 사이즈 
+    public float TotalProgress; // 전체 진행률 0 ~ 1 
 
     public DownloadProgressStatus(long downloadedBytes, long totalBytes, long remainedBytes, float totalProgress)
     {
-        _downloadedBytes = downloadedBytes;
-        _totalBytes = totalBytes;
-        _remainedBytes = remainedBytes;
-        _totalProgress = totalProgress;
+        DownloadedBytes = downloadedBytes;
+        TotalBytes = totalBytes;
+        RemainingBytes = remainedBytes;
+        TotalProgress = totalProgress;
     }
 }
 

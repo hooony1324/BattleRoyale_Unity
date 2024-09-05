@@ -7,7 +7,8 @@ public enum EScene
 {
     Unknown,
     Login,
-
+    Lobby,
+    Game,
 }
 
 public abstract class BaseScene : InitOnce
