@@ -4,5 +4,54 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
+    public static bool Initialized { get; set; }
 
+    private static Managers s_instance;
+    private static Managers Instance { get { Init(); return s_instance; } }
+
+    // Core
+    private PoolManager _pool = new PoolManager();
+    private ResourceManager _resource = new ResourceManager();
+    private SceneManagerEx _scene = new SceneManagerEx();
+    private UIManager _ui = new UIManager();
+
+    public static PoolManager Pool => Instance?._pool;
+    public static ResourceManager Resource => Instance?._resource;
+    public static SceneManagerEx Scene => Instance?._scene;
+    public static UIManager UI => Instance?._ui;
+
+    // Contents
+    private GameManager _game = new GameManager();
+
+    public static GameManager Game => Instance?._game;
+
+    public static void Init()
+    {
+        if (s_instance == null && Initialized == false)
+        {
+            Initialized = true;
+
+            GameObject go = GameObject.Find("@Managers");
+            if (go == null)
+            {
+                go = new GameObject { name = "@Managers" };
+                go.AddComponent<Managers>();
+            }
+
+            DontDestroyOnLoad(go);
+            s_instance = go.GetComponent<Managers>();
+
+            // 필요하면 다른 매니저 Init
+            // _event.Init();
+        }
+    }
+
+    public static void Clear()
+    {
+        //Event.Clear();
+        //Scene.Clear();
+        //UI.Clear();
+        //Object.Clear();
+        //Pool.Clear();
+    }
 }

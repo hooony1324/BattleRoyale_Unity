@@ -74,14 +74,15 @@ public class RectTransformInspector : Editor
         }
 
         EditorGUILayout.Space(15f);
-        
+        EditorGUILayout.LabelField("비율로 사이즈 조절");
         EditorGUILayout.BeginHorizontal();
         {
             EditorGUIUtility.labelWidth = 80f;
-            EditorGUILayout.PrefixLabel("CustomRatio");
-            // Child Layout Size
-            
-            if (GUILayout.Button("Set Width(for Child Layout)"))
+            EditorGUILayout.PrefixLabel("Preset");
+
+            // for Child Layout
+            GUILayout.Width(100);
+            if (GUILayout.Button("Set Width(0.9 x 0.8)"))
             {
                 GameObject[] objs = Selection.gameObjects;
 
@@ -90,20 +91,18 @@ public class RectTransformInspector : Editor
                     RectTransform rt = obj.GetComponent<RectTransform>();
                     if (rt == null)
                         continue;
+
                     float cachePosY = rt.anchoredPosition.y;
                     float cacheHeight = rt.rect.height;
-                    rt.anchorMin = new Vector2(0.05f, 0.5f);
-                    rt.anchorMax = new Vector2(0.95f, 0.5f);
-                    
+                    rt.anchorMin = new Vector2(0.05f, 0.1f);
+                    rt.anchorMax = new Vector2(0.95f, 0.9f);
                     rt.offsetMin = new Vector2(0, 0);  // new Vector2(left, bottom)
                     rt.offsetMax = new Vector2(0, 0);  // new Vector2(right, top)
-                    rt.localPosition = new Vector3(0, cachePosY, 0);
-                    rt.sizeDelta = new Vector2(0, cacheHeight);
                 }
             }
 
-            // Popup UI Size
-            if (GUILayout.Button("Set Width&Height(Half Size)"))
+            // for Popup UI
+            if (GUILayout.Button("Set Width&Height(0.4 x 0.6)"))
             {
                 GameObject[] objs = Selection.gameObjects;
 

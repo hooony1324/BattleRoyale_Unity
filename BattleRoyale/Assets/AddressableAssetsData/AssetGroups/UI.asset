@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ded07fd55b253cf429de2630f0496161
+  m_SerializeEntries:
+  - m_GUID: 1f6d8dbbc9d16d84f9ed8870135df322
+    m_Address: Prefab 8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f77c3094199507468a82a5d31a7b528
+    m_Address: Prefab 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e9f273aa7a403c4b82574bfa50561cf
+    m_Address: Prefab 6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 679686f53f20a5b45b8d26af37757fb0
+    m_Address: Prefab 10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a56b97a88ab82740be1976a3548b5d3
+    m_Address: Prefab 3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f08c6ee3e0dd674b84b3044f328c8f0
+    m_Address: Prefab 11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f9b6f99682f19f4f8ce3c0a7887273e
+    m_Address: Prefab 4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 829b573641afa794a9e934c3b98f493e
+    m_Address: Prefab 5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa46af084e0797f44b817d3f1203aa4c
+    m_Address: Prefab 9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba5edfd0773a1e444b3874125994ad34
+    m_Address: Prefab 7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d43943428db69974a800eb3f2c19900e
+    m_Address: Prefab 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9e43dbd25e902247bcc474b47cd2074
+    m_Address: Prefab 12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fffa4fb571ce94d4ca51c1b19ad2ff1f
+    m_Address: Prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Login
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a075954e7ef4bf344afe13197fa38659, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d479feb0ad5d9494dbd9f0c2a83024be, type: 2}
+    - {fileID: 11400000, guid: 726d54975bbdbcb489837eaf532cd448, type: 2}
