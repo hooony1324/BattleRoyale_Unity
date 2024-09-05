@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Loading;
 using UnityEngine;
 
 public class LoadingPanel : UI_Base
@@ -11,17 +12,19 @@ public class LoadingPanel : UI_Base
         LoadingInfoText,
     }
 
-    public override bool Init()
+    public void Init()
     {
-        if (base.Init() == false)
-            return false;
-
         BindTMPTexts(typeof(Texts));
 
-        return true;
+        Managers.Scene.GetCurrentScene<LoginScene>().OnDownloadStateStateChanged += OnDownloadStateChanged;
     }
 
-    public void SetLoadingInfoText(string text)
+    private void OnDisable()
+    {
+        Managers.Scene.GetCurrentScene<LoginScene>().OnDownloadStateStateChanged -= OnDownloadStateChanged;
+    }
+
+    public void OnDownloadStateChanged(string text)
     {
         GetTMPText((int)Texts.LoadingInfoText).text = text;
     }

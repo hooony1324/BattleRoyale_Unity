@@ -27,6 +27,11 @@ public class UI_MessagePopup : UI_Popup
         BindTMPTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
 
+        for (int i = 0; i < (int)Buttons.ExitButton + 1; i++)
+        {
+            GetButton(i).onClick.AddListener(ClosePopupUI);
+        }
+
         return true;
     }
 
@@ -41,13 +46,8 @@ public class UI_MessagePopup : UI_Popup
 
         Button cancelButton = GetButton((int)Buttons.CancelButton);
         cancelButton.gameObject.SetActive(cancelButtonOn);
-        confirmButton.gameObject.BindEvent(cancelCallback ?? OnClickExitButton);
+        confirmButton.gameObject.BindEvent(cancelCallback);
 
         GetButton((int)Buttons.ExitButton).gameObject.SetActive(exitButtonOn);
-    }
-
-    void OnClickExitButton(PointerEventData data)
-    {
-        base.ClosePopupUI();
     }
 }

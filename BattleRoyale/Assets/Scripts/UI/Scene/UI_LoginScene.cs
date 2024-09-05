@@ -38,7 +38,6 @@ public class UI_LoginScene : UI_Scene
         {
             case ELoginSceneState.ResourceLoadFinished:
                 GetGameObject((int)Panels.LoginPanel).SetActive(true);
-                GetGameObject((int)Panels.LoadingPanel).SetActive(false);
                 break;
         }
     }

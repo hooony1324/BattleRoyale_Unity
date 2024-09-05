@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
+using UnityEngine.PlayerLoop;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class Downloader : MonoBehaviour
@@ -86,7 +87,7 @@ public class Downloader : MonoBehaviour
                 CurrentState = State.Downloading;
                 break;
             case State.Downloading:
-                Update();
+                UpdateDownload();
                 break;
         }
     }
@@ -126,7 +127,7 @@ public class Downloader : MonoBehaviour
         _downloadHandle.Completed += OnDependenciesDownloaded;
     }
 
-    public void Update()
+    public void UpdateDownload()
     {
         if (_downloadHandle.IsValid()
             && _downloadHandle.IsDone == false

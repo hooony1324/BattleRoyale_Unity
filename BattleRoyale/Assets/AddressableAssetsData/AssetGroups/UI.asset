@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Address: UI_MessagePopup
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Preload
+    - PreLogin
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a075954e7ef4bf344afe13197fa38659, type: 2}

@@ -19,7 +19,11 @@ public class LoginScene : BaseScene
     // Catalog비교하여 Adressable Bundle캐싱 -> Downloader
     // 캐싱한 Bundle을 로드하여 사용 -> Resource
     public delegate void LoginSceneStateDelegate(ELoginSceneState state);
+    public delegate void DownloadStateDelegate(string downloadInfoText);
+    
     public LoginSceneStateDelegate OnLoginSceneStateChanged;
+    public DownloadStateDelegate OnDownloadStateStateChanged;
+
 
     private ELoginSceneState _loginSceneState = ELoginSceneState.None;
     public ELoginSceneState LoginSceneState
@@ -39,8 +43,6 @@ public class LoginScene : BaseScene
     [SerializeField]
     private UI_LoginScene _loginScene;
     [SerializeField]
-    private UI_MessagePopup _messagePopup;
-    [SerializeField]
     private LoadingPanel _loadingPanel;
 
     Downloader _downloader;
@@ -55,14 +57,24 @@ public class LoginScene : BaseScene
         Managers.Scene.SetCurrentScene(this);
 
         _loginScene.Init();
+        _loadingPanel.Init();
         _downloader = gameObject.GetOrAddComponent<Downloader>();
-        _downloader.DownloadLabel = "Preload";
+        _downloader.DownloadLabel = "AtLogin";
+
+        Managers.Resource.LoadAllAsync<Object>("PreLogin", (key, current, total) =>
+        {
+            if (current == total)
+            {
+                StartCoroutine(StartDownload());
+            }
+        });
 
         return true;
     }
 
-    private IEnumerator Start()
+    private IEnumerator StartDownload()
     {
+
         yield return _downloader.StartDownload((events) =>
         {
             events.OnInitialized += OnInitialized;
@@ -73,12 +85,12 @@ public class LoginScene : BaseScene
         });
     }
 
-    private void OnInitialized()
+    void OnInitialized()
     {
         _downloader.GoNext();
     }
 
-    private void OnCatalogUpdated()
+    void OnCatalogUpdated()
     {
         _downloader.GoNext();
     }
@@ -87,31 +99,26 @@ public class LoginScene : BaseScene
     {
         Debug.Log($"다운로드 완료 ! : {Util.GetConvertedByteString(size, ESizeUnits.KB)} ({size}바이트)");
 
+        OnDownloadStateStateChanged?.Invoke($"다운로드 완료 ! : {Util.GetConvertedByteString(size, ESizeUnits.KB)} ({size}바이트)");
+
         if (size == 0)
         {
             LoginSceneState = ELoginSceneState.DownloadFinished;
             // Load 시작
-            Managers.Resource.LoadAllAsync<Object>("Preload", (key, count, totalCount) =>
+            Managers.Resource.LoadAllAsync<Object>("PreLogin", (key, count, totalCount) =>
             {
-            string text;
-            if (count != totalCount)
-            {
-                text = $"Loading... {key} {count}/{totalCount}";
-            }
-            else
-            {
-                text = "Loading Completed";
-                LoginSceneState = ELoginSceneState.ResourceLoadFinished;
-
-                    _messagePopup.Init();
-                    _messagePopup.SetInfo("테스트 씬 변경", confirmButtonOn: true, confirmCallback: (eventData) =>
-                    {
-                        Managers.Scene.LoadScene(EScene.Lobby);
-                    });
+                string text;
+                if (count != totalCount)
+                {
+                    text = $"Loading... {key} {count}/{totalCount}";
+                }
+                else
+                {
+                    text = "Loading Completed";
+                    LoginSceneState = ELoginSceneState.ResourceLoadFinished;
                 }
 
-                _loadingPanel.SetLoadingInfoText(text);
-
+                OnDownloadStateStateChanged?.Invoke(text);
             });
         }
         else
@@ -122,14 +129,14 @@ public class LoginScene : BaseScene
 
             // 다운로드할지 물어봄
             LoginSceneState = ELoginSceneState.AskingDownload;
-            _messagePopup.SetInfo($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", confirmButtonOn: true, confirmCallback: (eventData) => 
+            Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", confirmButtonOn: true, confirmCallback: (eventData) => 
             {
                 // Confirm
                 LoginSceneState = ELoginSceneState.Downloading;
                 _downloader.GoNext();
 
             });
-            _messagePopup.gameObject.SetActive(true);
+
         }
     }
 
@@ -139,7 +146,9 @@ public class LoginScene : BaseScene
             return;
 
         _prevProgress = progress;
-        _loadingPanel.SetLoadingInfoText($"다운로드중입니다. 잠시만 기다려주세요. {(progress.TotalProgress * 100).ToString("0.00")}% 완료");
+
+        string text = $"다운로드 중... {(progress.TotalProgress * 100).ToString("0.00")}% 완료";
+        OnDownloadStateStateChanged?.Invoke(text);
     }
 
     private void OnFinished(bool isSuccess)
