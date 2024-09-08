@@ -17,6 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ded07fd55b253cf429de2630f0496161
   m_SerializeEntries:
+  - m_GUID: 5fe056bd58ecf6a4da12397f9f0c1fa7
+    m_Address: UI_LobbyScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d16d3d4910894542803ff340d1768e6
+    m_Address: UI_GameScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 904d35cd8ab40c9429f6ab57e5cf4789
     m_Address: UI_MessagePopup
     m_ReadOnly: 0

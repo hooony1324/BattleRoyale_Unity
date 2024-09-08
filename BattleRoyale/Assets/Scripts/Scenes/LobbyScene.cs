@@ -10,7 +10,7 @@ public class LobbyScene : BaseScene
         if (base.Init() == false)
             return false;
 
-        Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo("테스트입니당");
+        Managers.UI.ShowSceneUI<UI_LobbyScene>();
 
         return true;
     }

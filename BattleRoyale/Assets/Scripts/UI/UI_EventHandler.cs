@@ -6,38 +6,36 @@ using UnityEngine.EventSystems;
 
 public enum EUIEvent
 {
-    Click,
-    Enter,
-    Exit,
+        Click,
+        PointerDown,
+        PointerUp,
+        Drag,
 }
 
-public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public Action<PointerEventData> OnClickHandler = null;
-    public Action<PointerEventData> OnEnterHandler = null;
-    public Action<PointerEventData> OnExitHandler = null;
+    public event Action<PointerEventData> OnClickHandler = null;
+    public event Action<PointerEventData> OnPointerDownHandler = null;
+    public event Action<PointerEventData> OnPointerUpHandler = null;
+    public event Action<PointerEventData> OnDragHandler = null;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (OnClickHandler != null)
-        {
-            OnClickHandler.Invoke(eventData);
-        }
+        OnClickHandler?.Invoke(eventData);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (OnEnterHandler != null)
-        {
-            OnEnterHandler.Invoke(eventData);
-        }
+        OnPointerDownHandler?.Invoke(eventData);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        if (OnExitHandler != null)
-        {
-            OnExitHandler.Invoke(eventData);
-        }
+        OnPointerUpHandler?.Invoke(eventData);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        OnDragHandler?.Invoke(eventData);
     }
 }

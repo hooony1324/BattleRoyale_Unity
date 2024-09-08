@@ -7,39 +7,71 @@ using TMPro;
 using UnityEngine;
 using static LoginScene;
 
-
-
 public class UI_LoginScene : UI_Scene
 {
-    enum Panels
+    enum GameObjects
     {
-        LoginPanel,
+        LoginPanels,
         LoadingPanel,
     }
-
-    public void Init()
+    public enum ELoginSection
     {
-        BindGameObjects(typeof(Panels));
+        SelectLogin,
+        SignIn,
+        SignUp,
 
-        GetGameObject((int)Panels.LoginPanel).SetActive(false);
-        GetGameObject((int)Panels.LoadingPanel).gameObject.SetActive(true);
+        Count,
+        Idle,
+    }
 
-        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged += HandleSceneUI;
+    private ELoginSection _loginSection = ELoginSection.Idle;
+    public ELoginSection LoginSection
+    {
+        get { return _loginSection; }
+        set
+        {
+            if (_loginSection != value)
+            {
+                _loginSection = value;
+                for (int i = 0; i < (int)ELoginSection.Count; i++)
+                {
+                    _uiPanels[i].SetActive(i == (int)_loginSection);
+                }
+            }
+        }
+    }
+
+    private GameObject[] _uiPanels = new GameObject[(int)ELoginSection.Count];
+    public void Setup()
+    {
+        BindGameObjects(typeof(GameObjects));
+
+        int index = 0;
+        foreach (Transform child in GetGameObject((int)GameObjects.LoginPanels).transform)
+        {
+            _uiPanels[index] = child.gameObject;
+            index++;
+        }
+        GetGameObject((int)GameObjects.LoadingPanel).gameObject.SetActive(true);
+
+        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged += HandleLoginSceneState;
     }
 
     private void OnDestroy()
     {
-        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged -= HandleSceneUI;
+        Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged -= HandleLoginSceneState;
     }
 
-    void HandleSceneUI(ELoginSceneState state)
+    void HandleLoginSceneState(ELoginSceneState state)
     {
         switch (state)
         {
+            // 다운로드 끝났으면 로그인 선택 상태로 변경
             case ELoginSceneState.ResourceLoadFinished:
-                GetGameObject((int)Panels.LoginPanel).SetActive(true);
+                LoginSection = ELoginSection.SelectLogin;
                 break;
         }
     }
 
 }
+

@@ -56,8 +56,8 @@ public class LoginScene : BaseScene
         SceneType = EScene.Login;
         Managers.Scene.SetCurrentScene(this);
 
-        _loginScene.Init();
-        _loadingPanel.Init();
+        _loginScene.Setup();
+        _loadingPanel.Setup();
         _downloader = gameObject.GetOrAddComponent<Downloader>();
         _downloader.DownloadLabel = "AtLogin";
 
@@ -105,7 +105,7 @@ public class LoginScene : BaseScene
         {
             LoginSceneState = ELoginSceneState.DownloadFinished;
             // Load 시작
-            Managers.Resource.LoadAllAsync<Object>("PreLogin", (key, count, totalCount) =>
+            Managers.Resource.LoadAllAsync<Object>(_downloader.DownloadLabel, (key, count, totalCount) =>
             {
                 string text;
                 if (count != totalCount)
@@ -155,8 +155,6 @@ public class LoginScene : BaseScene
     {
         LoginSceneState = ELoginSceneState.DownloadFinished;
         _downloader.GoNext();
-
-
 
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Managers : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
 
+            Object eventSystem = GameObject.FindObjectOfType(typeof(EventSystem));
+            DontDestroyOnLoad(eventSystem);
+            
             // 필요하면 다른 매니저 Init
             // _event.Init();
         }

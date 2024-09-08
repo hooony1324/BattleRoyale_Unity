@@ -65,30 +65,28 @@ public class UI_Base : InitOnce
     protected TMP_Dropdown GetTMPDropdown(int idx) { return Get<TMP_Dropdown>(idx); }
     protected TMP_InputField GetTMPInputField(int idx) { return Get<TMP_InputField>(idx); }
 
-    public static void BindEvent(GameObject gameObejct, Action<PointerEventData> action, EUIEvent type = EUIEvent.Click)
+    public static void BindEvent(GameObject gameObejct, Action<PointerEventData> action = null, EUIEvent type = EUIEvent.Click)
     {
-        UI_EventHandler eventHandler = gameObejct.GetOrAddComponent<UI_EventHandler>();
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(gameObejct);
 
         switch (type)
         {
             case EUIEvent.Click:
-                {
-                    eventHandler.OnClickHandler -= action;
-                    eventHandler.OnClickHandler += action;
-                    break;
-                }
-            case EUIEvent.Enter:
-                {
-                    eventHandler.OnEnterHandler -= action;
-                    eventHandler.OnEnterHandler += action;
-                    break;
-                }
-            case EUIEvent.Exit:
-                {
-                    eventHandler.OnExitHandler -= action;
-                    eventHandler.OnExitHandler += action;
-                    break;
-                }
+                evt.OnClickHandler -= action;
+                evt.OnClickHandler += action;
+                break;
+            case EUIEvent.PointerDown:
+                evt.OnPointerDownHandler -= action;
+                evt.OnPointerDownHandler += action;
+                break;
+            case EUIEvent.PointerUp:
+                evt.OnPointerUpHandler -= action;
+                evt.OnPointerUpHandler += action;
+                break;
+            case EUIEvent.Drag:
+                evt.OnDragHandler -= action;
+                evt.OnDragHandler += action;
+                break;
         }
     }
 }
