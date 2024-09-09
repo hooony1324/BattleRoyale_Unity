@@ -11,6 +11,9 @@ public class UI_MessagePopup : UI_Popup
     enum Texts
     {
         MessageText,
+
+        ConfirmText,
+        CancelText,
     }
     enum Buttons
     {
@@ -18,6 +21,8 @@ public class UI_MessagePopup : UI_Popup
         CancelButton,       // right Button
         ExitButton,
     }
+
+    private Action<bool> OnDecision;
 
     public override bool Init()
     {
@@ -27,27 +32,54 @@ public class UI_MessagePopup : UI_Popup
         BindTMPTexts(typeof(Texts));
         BindButtons(typeof(Buttons));
 
-        for (int i = 0; i < (int)Buttons.ExitButton + 1; i++)
-        {
-            GetButton(i).onClick.AddListener(ClosePopupUI);
-        }
+        GetButton((int)Buttons.ConfirmButton).gameObject.BindEvent(OnConfirmButtonClicked);
+        GetButton((int)Buttons.CancelButton).gameObject.BindEvent(OnCancelButtonClicked);
+        GetButton((int)Buttons.ExitButton).gameObject.BindEvent(ClosePopupUI);
 
         return true;
     }
 
     
-    public void SetInfo(string msgText, bool confirmButtonOn = false, bool cancelButtonOn = false, Action<PointerEventData> confirmCallback = null, Action<PointerEventData> cancelCallback = null, bool exitButtonOn = false)
+    public void SetInfo(string msgText, Action<bool> callback = null,
+    bool showConfirmButton = false, string confirmButtonText = null,
+    bool showCancelButton = false, string cancelButtonText = null,
+    bool showExitButton = false)
     {
         GetTMPText((int)Texts.MessageText).text = msgText;
 
         Button confirmButton = GetButton((int)Buttons.ConfirmButton);
-        confirmButton.gameObject.SetActive(confirmButtonOn);
-        confirmButton.gameObject.BindEvent(confirmCallback);
+        confirmButton.gameObject.SetActive(showConfirmButton);        
+        GetTMPText((int)Texts.ConfirmText).text = confirmButtonText ?? "확인";
 
         Button cancelButton = GetButton((int)Buttons.CancelButton);
-        cancelButton.gameObject.SetActive(cancelButtonOn);
-        confirmButton.gameObject.BindEvent(cancelCallback);
+        cancelButton.gameObject.SetActive(showCancelButton);
+        GetTMPText((int)Texts.CancelText).text = cancelButtonText ?? "취소";
 
-        GetButton((int)Buttons.ExitButton).gameObject.SetActive(exitButtonOn);
+        if (callback != null)
+            OnDecision = callback;
+
+        GetButton((int)Buttons.ExitButton).gameObject.SetActive(showExitButton);
+    }
+
+    private void OnConfirmButtonClicked(PointerEventData eventData)
+    {
+        OnDecision?.Invoke(true);
+        base.ClosePopupUI();
+    }
+
+    private void OnCancelButtonClicked(PointerEventData eventData)
+    {
+        OnDecision?.Invoke(false);
+        base.ClosePopupUI();
+    }
+
+    private void OnDisable()
+    {
+        OnDecision = null;
+    }
+
+    private void ClosePopupUI(PointerEventData eventData)
+    {
+        base.ClosePopupUI();
     }
 }

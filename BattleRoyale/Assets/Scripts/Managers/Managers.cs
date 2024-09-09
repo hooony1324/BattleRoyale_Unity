@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -26,6 +27,17 @@ public class Managers : MonoBehaviour
 
     public static GameManager Game => Instance?._game;
 
+    // Server
+    private static BackEndServerManager _bServer;
+    private static Dispatcher _dispatcher;
+
+    public static BackEndServerManager BServer => _bServer;
+    public static Dispatcher Dispatcher => _dispatcher;
+
+    private static SendQueueManager _sendQueueManager;
+
+    public static SendQueueManager SendQueueManager => _sendQueueManager;
+
     public static void Init()
     {
         if (s_instance == null && Initialized == false)
@@ -38,6 +50,10 @@ public class Managers : MonoBehaviour
                 go = new GameObject { name = "@Managers" };
                 go.AddComponent<Managers>();
             }
+
+            _bServer = go.GetComponent<BackEndServerManager>();
+            _dispatcher = go.GetComponent<Dispatcher>();
+            _sendQueueManager = go.GetComponent<SendQueueManager>();
 
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();

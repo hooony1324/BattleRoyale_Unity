@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 using UnityEngine.AddressableAssets;
 using System;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager
 {
     // 실제 로드한 리소스
     private Dictionary<string, Object> _resources = new Dictionary<string, Object>();

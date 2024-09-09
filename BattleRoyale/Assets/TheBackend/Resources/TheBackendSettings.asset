@@ -17,7 +17,7 @@ MonoBehaviour:
   functionAuthKey: 
   packageName: com.ksh.BattleRoyale
   sendLogReport: 1
-  timeOutSec: 100
+  timeOutSec: 30
   Version: 5.13.0
   autoRefreshToken: 1
   retryWhenClientRequestFailError: 1

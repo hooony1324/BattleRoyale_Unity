@@ -20,7 +20,7 @@ public class LoginScene : BaseScene
     // 캐싱한 Bundle을 로드하여 사용 -> Resource
     public delegate void LoginSceneStateDelegate(ELoginSceneState state);
     public delegate void DownloadStateDelegate(string downloadInfoText);
-    
+
     public LoginSceneStateDelegate OnLoginSceneStateChanged;
     public DownloadStateDelegate OnDownloadStateStateChanged;
 
@@ -129,11 +129,15 @@ public class LoginScene : BaseScene
 
             // 다운로드할지 물어봄
             LoginSceneState = ELoginSceneState.AskingDownload;
-            Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", confirmButtonOn: true, confirmCallback: (eventData) => 
+            Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", showConfirmButton: true, callback: (result) =>
             {
-                // Confirm
-                LoginSceneState = ELoginSceneState.Downloading;
-                _downloader.GoNext();
+                if (result)
+                {
+                    // Confirm
+                    LoginSceneState = ELoginSceneState.Downloading;
+                    _downloader.GoNext();
+                }
+
 
             });
 
@@ -160,6 +164,6 @@ public class LoginScene : BaseScene
 
     public override void Clear()
     {
-        
+
     }
 }

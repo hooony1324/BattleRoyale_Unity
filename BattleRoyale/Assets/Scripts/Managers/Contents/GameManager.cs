@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
     public event Action<Vector2> OnMoveDirChanged;
     private Vector2 _moveDir = Vector2.zero;

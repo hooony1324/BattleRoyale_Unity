@@ -11,49 +11,17 @@ public class UI_LoginScene : UI_Scene
 {
     enum GameObjects
     {
-        LoginPanels,
+        SelectLoginPanel,
         LoadingPanel,
     }
-    public enum ELoginSection
-    {
-        SelectLogin,
-        SignIn,
-        SignUp,
 
-        Count,
-        Idle,
-    }
-
-    private ELoginSection _loginSection = ELoginSection.Idle;
-    public ELoginSection LoginSection
-    {
-        get { return _loginSection; }
-        set
-        {
-            if (_loginSection != value)
-            {
-                _loginSection = value;
-                for (int i = 0; i < (int)ELoginSection.Count; i++)
-                {
-                    _uiPanels[i].SetActive(i == (int)_loginSection);
-                }
-            }
-        }
-    }
-
-    private GameObject[] _uiPanels = new GameObject[(int)ELoginSection.Count];
     public void Setup()
     {
         BindGameObjects(typeof(GameObjects));
 
-        int index = 0;
-        foreach (Transform child in GetGameObject((int)GameObjects.LoginPanels).transform)
-        {
-            _uiPanels[index] = child.gameObject;
-            index++;
-        }
         GetGameObject((int)GameObjects.LoadingPanel).gameObject.SetActive(true);
-
+        GetGameObject((int)GameObjects.SelectLoginPanel).gameObject.SetActive(false);
+        
         Managers.Scene.GetCurrentScene<LoginScene>().OnLoginSceneStateChanged += HandleLoginSceneState;
     }
 
@@ -68,7 +36,7 @@ public class UI_LoginScene : UI_Scene
         {
             // 다운로드 끝났으면 로그인 선택 상태로 변경
             case ELoginSceneState.ResourceLoadFinished:
-                LoginSection = ELoginSection.SelectLogin;
+                GetGameObject((int)GameObjects.SelectLoginPanel).gameObject.SetActive(true);
                 break;
         }
     }

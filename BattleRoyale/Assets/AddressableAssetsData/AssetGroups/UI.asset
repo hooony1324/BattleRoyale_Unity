@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ded07fd55b253cf429de2630f0496161
   m_SerializeEntries:
+  - m_GUID: 541b39afb54123f4cb5dcb418c8c7396
+    m_Address: UI_SignInPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5fe056bd58ecf6a4da12397f9f0c1fa7
     m_Address: UI_LobbyScene
     m_ReadOnly: 0
@@ -34,6 +40,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreLogin
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd5d94eb661d4c445a14d39db17e4fce
+    m_Address: UI_InsertNicknamePopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5055b32cdd85f04aa78150d3ff08de9
+    m_Address: UI_SignUpPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a075954e7ef4bf344afe13197fa38659, type: 2}

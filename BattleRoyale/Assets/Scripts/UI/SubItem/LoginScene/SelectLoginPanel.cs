@@ -16,13 +16,13 @@ public class SelectLoginPanel : UI_Base
 
         BindButtons(typeof(Buttons));
 
-        GetButton((int)Buttons.LoginButton).gameObject.BindEvent(TestLobbyStart);
+        GetButton((int)Buttons.LoginButton).gameObject.BindEvent(OnClickLoginButton);
 
         return true;
     }
 
-    void TestLobbyStart(PointerEventData pointerEventData)
+    void OnClickLoginButton(PointerEventData eventData)
     {
-        Managers.Scene.LoadScene(EScene.Lobby);
+        Managers.UI.ShowPopupUI<UI_SignInPopup>();
     }
 }

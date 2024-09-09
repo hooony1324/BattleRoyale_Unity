@@ -33,7 +33,7 @@ public class SendQueueMgr : MonoBehaviour
         {
             // SendQueue를 정상적으로 사용하기 위해서는 
             // 아래 Poll 함수가 반드시 정기적으로 호출되어야 합니다.
-            BackEnd.SendQueue.Poll();
+            SendQueue.Poll();
         }
     }
 
@@ -62,6 +62,6 @@ public class SendQueueMgr : MonoBehaviour
     void OnApplicationQuit()
     {
         // 어플리케이션이 종료되었을 때 SendQueue를 정지 시킴
-        BackEnd.SendQueue.StopSendQueue();
+        SendQueue.StopSendQueue();
     }
 }
