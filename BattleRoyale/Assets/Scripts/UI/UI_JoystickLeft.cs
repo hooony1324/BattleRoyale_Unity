@@ -25,7 +25,7 @@ public class UI_JoystickLeft : UI_Base
 
         _background = GetGameObject((int)GameObjects.Background).GetComponent<RectTransform>();
         _controlStick = GetGameObject((int)GameObjects.ControlStick).GetComponent<RectTransform>();
-        _radius = _background.GetComponent<RectTransform>().rect.width * 0.5f;
+        _radius = (_background.GetComponent<RectTransform>().rect.width - _controlStick.GetComponent<RectTransform>().rect.width) * 0.5f;
 
         gameObject.BindEvent(OnPointerDown, type: EUIEvent.PointerDown);
         gameObject.BindEvent(OnPointerUp, type: EUIEvent.PointerUp);
@@ -42,7 +42,6 @@ public class UI_JoystickLeft : UI_Base
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("드래그중...");
         _controlStick.anchoredPosition = Vector2.zero;
         Managers.Game.MoveDir = Vector2.zero;
     }
@@ -54,8 +53,6 @@ public class UI_JoystickLeft : UI_Base
         _controlStick.localPosition = clampedPos;
 
         Managers.Game.MoveDir = clampedPos.normalized;
-
-        Debug.Log("드래그중...");
     }
     
 }

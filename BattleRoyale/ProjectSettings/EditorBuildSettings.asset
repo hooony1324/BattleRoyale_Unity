@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/GoogleHashKey.unity
+    guid: 938f824c26ebc304984bf268f86da53a
   - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: c1a53105636de2049b9d16067069a60a

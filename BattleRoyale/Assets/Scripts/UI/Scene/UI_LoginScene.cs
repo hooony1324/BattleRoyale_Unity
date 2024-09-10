@@ -51,8 +51,6 @@ public class UI_LoginScene : UI_Scene
             {
                 if (result)
                 {
-                    // ChangeLobby
-                    Debug.Log("Load Lobby scene");
                     Managers.Scene.LoadScene(EScene.Lobby);
                     return;
                 }

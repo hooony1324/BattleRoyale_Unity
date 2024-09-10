@@ -4,10 +4,6 @@ using UnityEngine;
 
 using BackEnd;
 using static BackEnd.SendQueue;
-using System.Collections;
-using UnityEditor.iOS;
-using BackEnd.Quobject.EngineIoClientDotNet.Modules;
-using BackEnd.Quobject.SocketIoClientDotNet.Client;
 
 public class BackEndServerManager : MonoBehaviour
 {
