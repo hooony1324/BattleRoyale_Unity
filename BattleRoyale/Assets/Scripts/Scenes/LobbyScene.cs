@@ -10,6 +10,9 @@ public class LobbyScene : BaseScene
         if (base.Init() == false)
             return false;
 
+        SceneType = EScene.Lobby;
+        Managers.Scene.SetCurrentScene(this);
+
         Managers.UI.ShowSceneUI<UI_LobbyScene>();
 
         return true;

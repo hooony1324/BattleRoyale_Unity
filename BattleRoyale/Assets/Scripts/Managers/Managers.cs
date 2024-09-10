@@ -28,10 +28,13 @@ public class Managers : MonoBehaviour
     public static GameManager Game => Instance?._game;
 
     // Server
-    private static BackEndServerManager _bServer;
+    private static BackEndServerManager _server;
+    
+    private static BackEndMatchManager _match;
     private static Dispatcher _dispatcher;
 
-    public static BackEndServerManager BServer => _bServer;
+    public static BackEndServerManager Server => _server;
+    public static BackEndMatchManager Match => _match;
     public static Dispatcher Dispatcher => _dispatcher;
 
     private static SendQueueManager _sendQueueManager;
@@ -51,7 +54,8 @@ public class Managers : MonoBehaviour
                 go.AddComponent<Managers>();
             }
 
-            _bServer = go.GetComponent<BackEndServerManager>();
+            _server = go.GetComponent<BackEndServerManager>();
+            _match = go.GetComponent<BackEndMatchManager>();
             _dispatcher = go.GetComponent<Dispatcher>();
             _sendQueueManager = go.GetComponent<SendQueueManager>();
 

@@ -10,8 +10,11 @@ public class GameScene : BaseScene
         if (base.Init() == false)
             return false;
 
+        SceneType = EScene.Game;
+        Managers.Scene.SetCurrentScene(this);
+
         Managers.UI.ShowSceneUI<UI_GameScene>();
-        
+
         GameObject player = Managers.Resource.Instantiate("Player");
         player.transform.position = new Vector3(0, 0, 0);
 

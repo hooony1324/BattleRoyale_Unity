@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ded07fd55b253cf429de2630f0496161
   m_SerializeEntries:
+  - m_GUID: 02c6139e6f46e654dabd664c0dca2a5a
+    m_Address: UI_LoadingBlockerPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 541b39afb54123f4cb5dcb418c8c7396
     m_Address: UI_SignInPopup
     m_ReadOnly: 0

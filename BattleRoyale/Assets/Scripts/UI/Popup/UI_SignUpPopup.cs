@@ -42,7 +42,7 @@ public class UI_SignUpPopup : UI_Popup
             return;
         }
 
-        Managers.BServer.CustomSingUp(id, pw, (bool result, string error) =>
+        Managers.Server.CustomSingUp(id, pw, (bool result, string error) =>
         {
             Managers.Dispatcher.BeginInvoke(() =>
             {
@@ -52,8 +52,7 @@ public class UI_SignUpPopup : UI_Popup
                     return;
                 }
 
-                Debug.Log("Change Lobby Scene");
-                // Change Lobby Scene
+                Managers.Scene.LoadScene(EScene.Lobby);
             });
         });
     }

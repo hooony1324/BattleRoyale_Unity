@@ -32,6 +32,10 @@ public class SceneManagerEx
         }
     }
 
+    public bool CheckCurrentScene(EScene type)
+    {
+        return SceneManager.GetActiveScene().name.Equals(GetSceneName(type));   
+    }
     private string GetSceneName(EScene type)
     {
         string name = Enum.GetName(typeof(EScene), type);

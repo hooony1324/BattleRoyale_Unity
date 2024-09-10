@@ -13,8 +13,8 @@ public class BackEndServerManager : MonoBehaviour
 {
     public bool IsLoginSuccessed { get; private set; }
     private string _tempNickName;               // 설정할 닉네임
-    public string MyNickname;                     // 로그인한 계정의 닉네임
-    public string MyInDate;                       // 로그인한 InDate(데이터 발생한 시간)
+    public string MyNickname;                   // 로그인한 계정의 닉네임
+    public string MyInDate;                     // 로그인한 InDate(데이터 발생한 시간)
 
     private Action<bool, string> OnLoginSuccessed = null;
     private const string BackendError = "statusCode : {0}\nErrorCode : {1}\nMessage : {2}";
@@ -36,6 +36,8 @@ public class BackEndServerManager : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("Backend초기화 성공");
+
+            // Backend초기화한 뒤 SendQueueManager초기화
             Managers.SendQueueManager.Init();
         }
         else
@@ -100,6 +102,24 @@ public class BackEndServerManager : MonoBehaviour
         });
     }
 
+    public void BackendTokenLogin(Action<bool, string> action)
+    {
+        Enqueue(Backend.BMember.LoginWithTheBackendToken, callback =>
+        {
+            if (callback.IsSuccess())
+            {
+                Debug.Log("토큰 로그인 성공");
+                OnLoginSuccessed = action;
+
+                OnPrevBackendAuthorized();                
+                return;
+            }
+
+            Debug.Log($"토큰 로그인 실패\n{callback}");
+            action(false, string.Empty);
+        });
+    }
+
     void OnPrevBackendAuthorized()
     {
         IsLoginSuccessed = true;
@@ -129,8 +149,11 @@ public class BackEndServerManager : MonoBehaviour
             MyNickname = info["nickname"].ToString();
             MyInDate = info["inDate"].ToString();
 
-            // 로그인 됬음 다음 동작
-            // ex) LoadMatchLists()
+            if (OnLoginSuccessed != null)
+            {
+                Managers.Match.GetMatchList(OnLoginSuccessed);
+            }
         });
     }
+
 }

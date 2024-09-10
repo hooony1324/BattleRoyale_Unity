@@ -42,7 +42,7 @@ public class UI_SignInPopup : UI_Popup
             return;
         }
 
-        Managers.BServer.CustomLogin(id, pw, (bool result, string error) => 
+        Managers.Server.CustomLogin(id, pw, (bool result, string error) => 
         {
             Managers.Dispatcher.BeginInvoke(() =>
             {
@@ -52,9 +52,7 @@ public class UI_SignInPopup : UI_Popup
                     return;
                 }
 
-                Debug.Log("로그인 성공");
-                // Change Lobby
-
+                Managers.Scene.LoadScene(EScene.Lobby);
             });
         });
         
