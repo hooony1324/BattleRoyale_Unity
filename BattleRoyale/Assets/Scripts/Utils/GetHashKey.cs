@@ -1,15 +1,19 @@
 using BackEnd;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GetHasyKey : MonoBehaviour
+public class GetHashKey : MonoBehaviour
 {
     [SerializeField]
     Button _getHashkeyButton;
 
     [SerializeField]
     TMP_InputField _inputField;
+
+    [SerializeField]
+    Button _goLoginSceneButton;
 
     void Awake()
     {
@@ -32,6 +36,11 @@ public class GetHasyKey : MonoBehaviour
             var key = Backend.Utils.GetGoogleHash();
             Debug.Log(key);
             _inputField.text = key;
+        });
+
+        _goLoginSceneButton.onClick.AddListener(() => 
+        {
+            SceneManager.LoadScene("Login");
         });
     }
 }

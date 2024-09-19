@@ -33,9 +33,12 @@ public class Managers : MonoBehaviour
     private static BackEndMatchManager _match;
     private static Dispatcher _dispatcher;
 
+    private static BackEndChatManager _chat;
+
     public static BackEndServerManager Server => _server;
     public static BackEndMatchManager Match => _match;
     public static Dispatcher Dispatcher => _dispatcher;
+    public static BackEndChatManager Chat => _chat;
 
     private static SendQueueManager _sendQueueManager;
 
@@ -47,6 +50,11 @@ public class Managers : MonoBehaviour
         {
             Initialized = true;
 
+            Application.targetFrameRate = 60;
+            Application.runInBackground = true;
+            QualitySettings.vSyncCount = 0;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
             GameObject go = GameObject.Find("@Managers");
             if (go == null)
             {
@@ -54,10 +62,12 @@ public class Managers : MonoBehaviour
                 go.AddComponent<Managers>();
             }
 
+            // Initialize Monobehaviour Managers
             _server = go.GetComponent<BackEndServerManager>();
             _match = go.GetComponent<BackEndMatchManager>();
             _dispatcher = go.GetComponent<Dispatcher>();
             _sendQueueManager = go.GetComponent<SendQueueManager>();
+            _chat = go.GetComponent<BackEndChatManager>();
 
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
@@ -65,8 +75,6 @@ public class Managers : MonoBehaviour
             Object eventSystem = GameObject.FindObjectOfType(typeof(EventSystem));
             DontDestroyOnLoad(eventSystem);
             
-            // 필요하면 다른 매니저 Init
-            // _event.Init();
         }
     }
 

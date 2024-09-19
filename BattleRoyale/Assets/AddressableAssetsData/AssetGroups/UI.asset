@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - AtLogin
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 068f5130b56b08241a760ecaf0d97754
+    m_Address: UI_ChatItem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AtLogin
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 541b39afb54123f4cb5dcb418c8c7396
     m_Address: UI_SignInPopup
     m_ReadOnly: 0

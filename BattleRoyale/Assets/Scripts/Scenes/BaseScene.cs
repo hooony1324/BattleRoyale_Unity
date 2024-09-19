@@ -19,10 +19,7 @@ public abstract class BaseScene : InitOnce
     {
         if (base.Init() == false)
             return false;
-
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
+        
 
         return true;
     }

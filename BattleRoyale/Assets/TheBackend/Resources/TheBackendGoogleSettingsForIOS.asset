@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1198741809, guid: 121945df52b96c740902ea051a2895ed, type: 3}
-  m_Name: TheBackendGoogleSettingsForAndroid
+  m_Script: {fileID: -1417519677, guid: 36fe862070d9a6e48ba552531560ef36, type: 3}
+  m_Name: TheBackendGoogleSettingsForIOS
   m_EditorClassIdentifier: 
-  webClientID: 460524151299-j1f4tsl735c1au15vrvrks5nq10qgvik.apps.googleusercontent.com
-  androidSDKVersion: 2.2.0
+  iosClientID: 
+  iosURLSchema: 
+  iosSDKVersion: 2.1.0

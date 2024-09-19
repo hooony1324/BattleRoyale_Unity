@@ -7,10 +7,18 @@ using static BackEnd.SendQueue;
 
 public class BackEndServerManager : MonoBehaviour
 {
+    struct ServerToken
+    {
+        public string Id;
+        public string Pw;
+        public string Language;
+    }
     public bool IsLoginSuccessed { get; private set; }
     private string _tempNickName;               // 설정할 닉네임
     public string MyNickname;                   // 로그인한 계정의 닉네임
     public string MyInDate;                     // 로그인한 InDate(데이터 발생한 시간)
+
+    public string UserToken {get; private set;}
 
     private Action<bool, string> OnLoginSuccessed = null;
     private const string BackendError = "statusCode : {0}\nErrorCode : {1}\nMessage : {2}";
@@ -35,13 +43,15 @@ public class BackEndServerManager : MonoBehaviour
 
             // Backend초기화한 뒤 SendQueueManager초기화
             Managers.SendQueueManager.Init();
+            
+            //TODO Chat.Init시점 == 로그인 뒤에
+            //Managers.Chat.Init();
         }
         else
         {
             Managers.UI.ShowPopupUI<UI_MessagePopup>($"초기화중 에러 발생\n\n{bro}");
         }
     }
-
 
     public void CustomLogin(string id, string pw, Action<bool, string> action)
     {
@@ -142,8 +152,11 @@ public class BackEndServerManager : MonoBehaviour
                 return;
             }
 
+
             MyNickname = info["nickname"].ToString();
             MyInDate = info["inDate"].ToString();
+
+            
 
             if (OnLoginSuccessed != null)
             {

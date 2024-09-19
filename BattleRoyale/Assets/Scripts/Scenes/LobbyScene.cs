@@ -18,6 +18,11 @@ public class LobbyScene : BaseScene
         return true;
     }
 
+    void Start()
+    {
+        Managers.Chat.Init();
+    }
+
 
     public override void Clear()
     {
